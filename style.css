@@ -104,7 +104,7 @@ p + p { margin-top: 16px; }
 .stitch-draw { stroke-dasharray: 1; }
 .stitch-draw-vertical { stroke-dashoffset: calc(1 - var(--vertical-stitch)); }
 .stitch-draw-horizontal { stroke-dashoffset: calc(1 - var(--horizontal-stitch)); }
-.motion-enabled .stitch-scene { height: 180svh; min-height: 1080px; padding: 0; }
+.motion-enabled .stitch-scene { height: 130svh; padding: 0; }
 .motion-enabled .stitch-scene-inner { position: sticky; top: 70px; min-height: 0; height: calc(100svh - 90px); max-height: 900px; }
 .seamed-section { position: relative; }
 .seam-rule { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: repeating-linear-gradient(90deg,var(--linen) 0 5px,transparent 5px 11px); pointer-events: none; }
@@ -320,7 +320,7 @@ td:first-child { font-weight: 500; min-width: 140px; }
   .stitch-copy .text-link { margin-top: 10px; }
   .stitch-figure { width: min(350px,100%); margin-inline: auto; padding: 50px 55px 24px; }
   .stitch-figure figcaption { margin-top: 24px; font-size: .6875rem; }
-  .motion-enabled .stitch-scene { height: 155svh; min-height: 950px; }
+  .motion-enabled .stitch-scene { height: 128svh; }
   .motion-enabled .stitch-scene-inner { top: 58px; height: calc(100svh - 70px); max-height: 800px; align-content: center; }
   .workshop-label { margin-bottom: 18px; font-size: .75rem; }
   .hero h1 { font-size: clamp(2.4rem,10vw,3.25rem); }
@@ -383,7 +383,7 @@ td:first-child { font-weight: 500; min-width: 140px; }
   .stitch-figure figcaption { margin-top: 20px; }
 }
 @media (max-height: 650px) and (max-width: 600px) {
-  .motion-enabled .stitch-scene { min-height: 0; height: 170svh; }
+  .motion-enabled .stitch-scene { height: 128svh; }
   .stitch-copy h2 { font-size: 2rem; }
   .stitch-copy p { margin-top: 10px; }
   .stitch-scene-inner { gap: 8px; }

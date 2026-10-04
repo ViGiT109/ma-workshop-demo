@@ -3,6 +3,7 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const root = document.documentElement;
   const scene = document.querySelector('[data-stitch-scene]');
+  const sceneInner = scene?.querySelector('.stitch-scene-inner');
   const board = scene?.querySelector('.patchwork-board');
   const hero = document.querySelector('.hero');
   const heroBoard = hero?.querySelector('.hero-board');
@@ -12,6 +13,15 @@
   const activeAnimations = new Set();
   let frame = 0;
   let observer;
+  let textObserver;
+  const enteredTexts = new WeakSet();
+  const textTargets = new Map();
+  document.querySelectorAll('.hero-copy, .stitch-copy, .section-head, .card-copy, .set-copy, .workshop-copy, .page-intro, .detail-copy, .steps li, main > .narrow').forEach(group => {
+    group.querySelectorAll('h1, h2, h3, p').forEach((text, index) => {
+      if (!text.matches('.gallery-caption, .gallery-note, .form-result') && text.textContent.trim())
+        textTargets.set(text, Math.min(index * 70, 180));
+    });
+  });
   let entered = false;
   const clamp = value => Math.min(1, Math.max(0, value));
   const rules = [...document.querySelectorAll('main > section:not(.hero):not(.stitch-scene), .footer')].map(section => {
@@ -45,6 +55,8 @@
     if (document.hidden) return;
     const height = window.innerHeight;
     const sceneRect = scene?.getBoundingClientRect();
+    const sceneInnerRect = sceneInner?.getBoundingClientRect();
+    const scenePin = sceneInner ? parseFloat(getComputedStyle(sceneInner).top) || 0 : 0;
     const heroRect = hero?.getBoundingClientRect();
     const chapterRects = chapters.map(chapter => chapter.getBoundingClientRect());
     const pageRange = Math.max(1, root.scrollHeight - height);
@@ -58,7 +70,8 @@
     progressLine?.style.setProperty('--reading-progress', pageProgress.toFixed(4));
     if (reducedMotion.matches) return;
     if (sceneRect && board && sceneRect.bottom > 0 && sceneRect.top < height) {
-      const progress = clamp((height * .35 - sceneRect.top) / Math.max(1, sceneRect.height - height * .85));
+      // Finish at the sticky release: the next section is already at the bottom edge.
+      const progress = clamp((scenePin - sceneRect.top) / Math.max(1, sceneRect.height - sceneInnerRect.height));
       const assembly = clamp(progress / .62);
       const stitching = clamp((progress - .62) / .38);
       board.style.setProperty('--spread', Math.pow(1 - assembly, 2).toFixed(4));
@@ -74,6 +87,7 @@
   }
   function configure() {
     observer?.disconnect();
+    textObserver?.disconnect();
     if (frame) cancelAnimationFrame(frame);
     frame = 0;
     activeAnimations.forEach(animation => animation.cancel());
@@ -93,6 +107,19 @@
       }, {rootMargin: '0px 0px -8% 0px', threshold: 0});
       rules.forEach(rule => {rule.classList.remove('is-drawn'); observer.observe(rule);});
     } else rules.forEach(rule => rule.classList.add('is-drawn'));
+    if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+      textObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting || enteredTexts.has(entry.target)) return;
+          const text = entry.target;
+          enteredTexts.add(text);
+          textObserver.unobserve(text);
+          animate(text, [{opacity: 0, transform: 'translateY(10px)'}, {opacity: 1, transform: 'translateY(0)'}],
+            {duration: 600, delay: textTargets.get(text), easing: 'cubic-bezier(.2,.65,.25,1)', fill: 'backwards'});
+        });
+      }, {rootMargin: '0px 0px -6% 0px', threshold: 0});
+      textTargets.forEach((delay, text) => {if (!enteredTexts.has(text)) textObserver.observe(text);});
+    }
     requestUpdate();
     entrance();
   }
