@@ -1,0 +1,42 @@
+{
+  "css_source": "https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..600&family=Literata:opsz,wght@7..72,400..600&display=swap",
+  "license": "SIL Open Font License 1.1",
+  "fonts": [
+    {
+      "file": "golos-cyrillic-ext.woff2",
+      "source": "https://fonts.gstatic.com/s/golostext/v7/q5uCsoe9Lv5t7Meb31EcEx58hLxR.woff2",
+      "sha256": "70cf502d77aa23c8a573db8853f20a8db705d18414d170f257a9e939113aad47",
+      "bytes": 17508
+    },
+    {
+      "file": "golos-cyrillic.woff2",
+      "source": "https://fonts.gstatic.com/s/golostext/v7/q5uCsoe9Lv5t7Meb31EcExd8hLxR.woff2",
+      "sha256": "17d048ca05cb1218af3c0d6dcdf882989e6d1cc5dcb598ea50eaf54850ff7229",
+      "bytes": 22032
+    },
+    {
+      "file": "golos-latin.woff2",
+      "source": "https://fonts.gstatic.com/s/golostext/v7/q5uCsoe9Lv5t7Meb31EcExN8hA.woff2",
+      "sha256": "9a69d0aa4734c4022224c002a3d944a702e0204972a49d892789f5668b922c2a",
+      "bytes": 37916
+    },
+    {
+      "file": "literata-cyrillic-ext.woff2",
+      "source": "https://fonts.gstatic.com/s/literata/v40/or3PQ6P12-iJxAIgLa78DkTtAoDhk0oVpaK3YLanFLHpPf2TbLi4J_zWTFCW.woff2",
+      "sha256": "e7dd3038c6f29995387cc89858e3b073eb55fd060c05c277f390334d0bdbe8ac",
+      "bytes": 16548
+    },
+    {
+      "file": "literata-cyrillic.woff2",
+      "source": "https://fonts.gstatic.com/s/literata/v40/or3PQ6P12-iJxAIgLa78DkTtAoDhk0oVpaK3YLanFLHpPf2TbLi4J_XWTFCW.woff2",
+      "sha256": "9e1faecc45e112755363617c4963371d53b66b409f2ca626e57e7d9cd4b9bd06",
+      "bytes": 48068
+    },
+    {
+      "file": "literata-latin.woff2",
+      "source": "https://fonts.gstatic.com/s/literata/v40/or3PQ6P12-iJxAIgLa78DkTtAoDhk0oVpaK3YLanFLHpPf2TbLi4J_HWTA.woff2",
+      "sha256": "7478e1920209e51dcc235d151d2056a0a6e3c54b4436f7030d256f231fe09b58",
+      "bytes": 85672
+    }
+  ]
+}
