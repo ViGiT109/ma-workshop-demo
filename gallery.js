@@ -8,7 +8,7 @@ for (const gallery of document.querySelectorAll('[data-photo-gallery]')) {
   })) : [{ src: full.href, alt: image.alt, caption: caption.textContent }];
   const dialog = gallery.querySelector('.photo-viewer');
   const largeImage = dialog.querySelector('.viewer-image');
-  image.draggable = largeImage.draggable = false;
+  image.draggable = largeImage.draggable = full.draggable = false;
   const counter = gallery.querySelector('.gallery-count');
   let index = 0;
   function show(next) {
